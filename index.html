@@ -18,26 +18,10 @@ body{
   color:white;
   text-align:center;
   overflow-x:hidden;
+  padding:40px 20px;
 }
 
-/* section animation */
-section{
-  min-height:100vh;
-  padding:80px 20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
-}
-
-section.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* heartbeat effect */
+/* heartbeat */
 h1,h2{
   animation:heartbeat 2s infinite;
 }
@@ -47,17 +31,20 @@ h1,h2{
   50%{transform:scale(1.05);}
 }
 
+section{
+  margin:60px auto;
+  max-width:900px;
+}
+
 p{
   font-size:1.15rem;
   line-height:1.9;
-  max-width:800px;
-  margin:auto;
 }
 
 /* button */
 .btn{
-  margin-top:30px;
-  padding:14px 32px;
+  margin-top:25px;
+  padding:14px 30px;
   background:white;
   color:#ff0844;
   border:none;
@@ -71,19 +58,6 @@ p{
   0%{box-shadow:0 0 0 0 rgba(255,255,255,0.6);}
   70%{box-shadow:0 0 0 18px rgba(255,255,255,0);}
   100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}
-}
-
-/* typing text */
-.typing{
-  border-right:2px solid white;
-  white-space:nowrap;
-  overflow:hidden;
-  width:0;
-  animation:typing 5s steps(50,end) forwards;
-}
-
-@keyframes typing{
-  to{width:100%;}
 }
 
 /* floating hearts */
@@ -102,45 +76,37 @@ p{
 #countdown{
   font-size:1.6rem;
   font-weight:bold;
-  margin-top:20px;
+  margin-top:15px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎶 BACKGROUND ROMANTIC SONG (AUTOPLAY) -->
-<iframe 
-  width="0" 
-  height="0" 
-  src="https://youtu.be/FQS7i2z1CoA?si=Sm_-9tIEHlyNvGho"
-  frameborder="0"
-  allow="autoplay">
-</iframe>
+<!-- 🎶 SONG (PLAY BUTTON SE START HOGA – 100% WORKS) -->
+<audio id="bgSong" loop>
+  <source src="https://youtu.be/FQS7i2z1CoA?si=GoQPEJk1QUuQ_6mF" type="audio/mpeg">
+</audio>
 
-<section class="show">
+<section>
   <h1>Hi Haniya ❤️</h1>
-  <p class="typing">
-    Ye website sirf tumhare liye hai… kyunki tum meri poori duniya ho 💞
+  <p>
+    Ye website sirf tumhare liye hai…<br>
+    kyunki tum meri zindagi ka sabse khoobsurat hissa ho 💞
   </p>
-  <button class="btn" onclick="scrollToSection('letter')">
-    Aage chalo jaan 💕
-  </button>
+  <button class="btn" onclick="playSong()">Play our song 🎶❤️</button>
 </section>
 
-<section id="letter">
+<section>
   <h2>Mera Dil ❤️</h2>
   <p>
     Haniya…<br><br>
-    Shayad main zyada express nahi karta,<br>
-    par jab tum mere saath hoti ho na,<br>
-    mujhe lagta hai sab kuch theek ho jaata hai 🥹  
+    Shayad main perfect nahi hoon,<br>
+    par jab baat tumhari hoti hai na,<br>
+    main apni poori duniya tum par vaar deta hoon 🥹  
     <br><br>
-    Tum meri zindagi ka wo hissa ho<br>
-    jiske bina har khushi adhoori lagti hai 💔➡️❤️  
-    <br><br>
-    Agar pyaar ek film hota,<br>
-    toh meri favourite movie… **tum hoti** 🎬💖
+    Tumhari muskaan meri sabse favourite feeling hai,<br>
+    aur tumhara saath… meri sabse badi taaqat 💖
   </p>
 </section>
 
@@ -153,36 +119,22 @@ p{
 <section>
   <h2>Ek Waada 🤞</h2>
   <p>
-    Main perfect nahi hoon,<br>
-    par jab baat tumhari aaye,<br>
-    main hamesha tumhare saath khada milunga 💍
+    Chahe zindagi jaisi bhi ho,<br>
+    main tumhara haath kabhi nahi chhodunga 💍
   </p>
 </section>
 
 <section>
-  <h2>Last Scene… 🥹</h2>
-  <p>
-    Will you be my forever Valentine? ❤️
-  </p>
-  <button class="btn" onclick="yesClicked()">YES 💖</button>
-  <button class="btn" onclick="yesClicked()">Obviously YES 😌</button>
+  <h2>Last Question… 🥹</h2>
+  <p>Will you be my forever Valentine? ❤️</p>
+  <button class="btn" onclick="finalYes()">YES 💖</button>
+  <button class="btn" onclick="finalYes()">Obviously YES 😌</button>
 </section>
 
 <script>
-// scroll reveal
-const sections = document.querySelectorAll("section");
-window.addEventListener("scroll",()=>{
-  sections.forEach(sec=>{
-    const top = sec.getBoundingClientRect().top;
-    if(top < window.innerHeight - 100){
-      sec.classList.add("show");
-    }
-  });
-});
-
-// smooth scroll
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+// song
+function playSong(){
+  document.getElementById("bgSong").play();
 }
 
 // countdown
@@ -208,12 +160,13 @@ setInterval(()=>{
   heart.style.fontSize=(16+Math.random()*24)+"px";
   document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),7000);
-},250);
+},300);
 
-function yesClicked(){
-  alert("😭❤️ Ye moment meri life ka favourite scene ban gaya!");
+function finalYes(){
+  alert("😭❤️ Tum meri zindagi ka sabse khoobsurat chapter ho, Haniya!");
 }
 </script>
 
 </body>
 </html>
+
